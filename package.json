@@ -1,7 +1,7 @@
 {
   "name": "sv-tahoe",
   "version": "0.4.8",
-  "desctiption": "SV XML based template engine",
+  "desctiption": "XML based template engine",
   "private": false,
   "bin": {
     "compile": "./compile"
