@@ -1,0 +1,12 @@
+<sv:root xmlns:sv="http://sv-soft.net/common" pref="lc">
+
+    <sv:block name="A" data-handler="a">
+        ${x}
+    </sv:block>
+
+    <sv:block name="B" data-handler="b">
+        ${z}
+        <lc:A y1="f"/>
+    </sv:block>
+
+</sv:root>

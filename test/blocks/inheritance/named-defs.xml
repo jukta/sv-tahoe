@@ -1,0 +1,17 @@
+<sv:root xmlns:sv="http://sv-soft.net/common" pref="lc">
+
+    <sv:block name="A">
+        <sv:def name="a"/>
+        <sv:def name="b"/>
+    </sv:block>
+
+    <sv:block name="B" parent="A">
+        <sv:def name="a">a in B</sv:def>
+        <sv:def name="b">b in B</sv:def>
+    </sv:block>
+
+    <sv:block name="C" parent="B">
+        <sv:def name="a">a in C</sv:def>
+        <sv:def name="b">b in C</sv:def>
+    </sv:block>
+</sv:root>

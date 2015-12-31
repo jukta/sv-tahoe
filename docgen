@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+'use strict';
+var tahoe = require('./index');
+
+tahoe.compiler.doc(function(err) {
+    if (err) {
+        console.error(err.message);
+    }
+});

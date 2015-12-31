@@ -1,0 +1,50 @@
+<sv:root xmlns:sv="http://sv-soft.net/common" pref="lc">
+
+    <sv:block name="var">
+        ${x}
+    </sv:block>
+
+    <sv:block name="parent_test" parent="var">
+    </sv:block>
+
+    <sv:block name="_anon_def_test">
+        <sv:def/>
+    </sv:block>
+    <sv:block name="anon_def_test" parent="_anon_def_test">
+        ${x}
+    </sv:block>
+
+    <sv:block name="_call_parent">
+        <sv:def>
+            parent
+        </sv:def>
+    </sv:block>
+    <sv:block name="call_parent" parent="_call_parent">
+        <sv:parent/>
+    </sv:block>
+
+
+    <sv:block name="__context_">
+        0-open ${x}
+        <sv:def/>
+        0-close ${x}
+    </sv:block>
+    <sv:block name="_context">
+        1-open ${x}
+        <sv:def/>
+        1-close ${x}
+    </sv:block>
+    <sv:block name="_context_" parent="__context_">
+        <lc:_context>
+            2-open ${x}
+            <sv:def name="1"/>
+            2-close ${x}
+        </lc:_context>
+    </sv:block>
+    <sv:block name="context" parent="_context_">
+        <sv:def name="1">
+            in ${x}
+        </sv:def>
+    </sv:block>
+
+</sv:root>

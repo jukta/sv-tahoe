@@ -1,0 +1,17 @@
+{
+  "name": "sv-tahoe",
+  "version": "0.4.8",
+  "desctiption": "SV XML based template engine",
+  "private": false,
+  "bin": {
+    "compile": "./compile"
+  },
+  "dependencies": {
+    "minimatch": "^3.0.0",
+    "ncp": "^2.0.0",
+    "sax": "^0.6.1",
+    "string-hash": "^1.1.0",
+    "tosource": "^0.1.3",
+    "uglify-js": "^2.4.20"
+  }
+}
