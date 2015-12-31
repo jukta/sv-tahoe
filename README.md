@@ -8,4 +8,4 @@ Installation
 Documentation
 -------------
 
-All documentation can be viewed online on the [Swig Website](http://paularmstrong.github.io/swig/).
+All documentation can be viewed on the [sv Tahoe Website](http://jukta.github.io/sv-tahoe/).
