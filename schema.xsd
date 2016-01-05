@@ -2,14 +2,37 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://svsoft.net/tahoe/schema" xmlns="http://svsoft.net/tahoe/schema" >
 
     <xs:element name="root" type="Root"/>
-    <xs:element name="block" type="Block"/>
 
     <xs:complexType name="Root">
         <xs:sequence>
+            <xs:element name="import" type="Import" minOccurs="0"/>
             <xs:element name="block" type="Block" minOccurs="0"/>
-            <xs:element name="macro" type="Macro" minOccurs="0"/>
         </xs:sequence>
+        <xs:attribute name="pref" type="xs:string"/>
     </xs:complexType>
+
+    <xs:simpleType name="Import">
+        <xs:attribute name="file" type="xs:string" use="required"/>
+        <xs:attribute name="prefix" type="xs:string" use="required"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="TagAttr">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="optional"/>
+    </xs:simpleType>
+
+    <xs:complexType name="Tag">
+        <xs:sequence>
+            <xs:element name="tagAttr" type="TagAttr" minOccurs="0"/>
+            <xs:element name="if" type="If" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="for" type="For" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="CloseAttr">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:simpleType>
 
     <xs:complexType name="Block">
         <xs:choice>
@@ -19,6 +42,9 @@
                 <xs:element name="for" type="For" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element name="script" type="Script" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element name="include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="tag" type="Tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="closeTag" type="Tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="set" type="Set" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element name="parent" type="Parent" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
@@ -36,28 +62,14 @@
                 <xs:element name="for" type="For" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element name="script" type="Script" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element name="include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="tag" type="Tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="closeTag" type="Tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="set" type="Set" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element name="parent" type="Parent" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:choice>
         <xs:attribute name="name" type="xs:string" use="required"/>
-        <xs:anyAttribute namespace="##any" processContents="lax"/>
-    </xs:complexType>
-
-    <xs:complexType name="Macro">
-        <xs:choice>
-            <xs:element name="def" type="Def" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:sequence>
-                <xs:element name="if" type="If" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="for" type="For" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="script" type="Script" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="parent" type="Parent" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:choice>
-        <xs:attribute name="name" type="xs:string" use="required"/>
-        <xs:attribute name="parent" type="xs:string" use="optional"/>
         <xs:anyAttribute namespace="##any" processContents="lax"/>
     </xs:complexType>
 
@@ -68,6 +80,9 @@
             <xs:element name="for" type="For" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="script" type="Script" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="tag" type="Tag" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="closeTag" type="Tag" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="set" type="Set" minOccurs="0" maxOccurs="unbounded"/>
             <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" use="optional"/>
@@ -94,7 +109,13 @@
         </xs:simpleContent>
     </xs:complexType>
 
-    <xs:complexType name="Parent">
-    </xs:complexType>
+    <xs:simpleType name="Parent">
+    </xs:simpleType>
+
+    <xs:simpleType name="Set">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="override" type="xs:string" use="optional"/>
+    </xs:simpleType>
 
 </xs:schema>
