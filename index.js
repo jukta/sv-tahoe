@@ -64,12 +64,8 @@ var path = require("path");
         };
         app.set('view engine', 'xml');
         app.engine('xml',function(path, options, fn) {
-            try {
-                var i = new DataProvider(options.__req, options.__res);
-                module.exports.tmpl.render(path, options, i, fn);
-            } catch (e) {
-                console.log(e.stack);
-            }
+            var i = new DataProvider(options.__req, options.__res);
+            module.exports.tmpl.render(path, options, i, fn);
         });
     };
 
