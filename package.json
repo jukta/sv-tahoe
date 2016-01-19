@@ -1,6 +1,6 @@
 {
   "name": "sv-tahoe",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "desctiption": "XML based template engine",
   "private": false,
   "bin": {
