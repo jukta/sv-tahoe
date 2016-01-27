@@ -43,16 +43,12 @@ var path = require("path");
         app.use(function(req, res, next) {
             var p = req.url.split("/");
             if (p[1] === '__tahoe') {
-                var body = '';
-                req.on("data",function(chunk){
-                    body += chunk.toString();
-                });
-                req.on("end",function(){
-                    var data = JSON.parse(body);
-                    var dp = new DataProvider(req, res);
-                    dp.get(p[2])(data, function(err, data) {
-                        res.send(JSON.stringify(data));
-                    });
+                var data = req.body;
+                data.__req = req;
+                data.__res = res;
+                var dp = new DataProvider(req, res);
+                dp.get(p[2])(data, function(err, data) {
+                    res.send(JSON.stringify(data));
                 });
             } else {
                 next();
