@@ -60,7 +60,7 @@ module.exports = {
     },
     "context": function(test) {
         this.ctx.render("var:context", {x:"hello"}, null, function(err, s) {
-            var ex = "0-open hello1-open undefined2-open helloin hello2-close hello1-close undefined0-close hello";
+            var ex = "0-open hello1-open 2-open helloin hello2-close hello1-close 0-close hello";
             test.equal(s, ex);
             test.done();
         });
